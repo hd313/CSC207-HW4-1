@@ -36,31 +36,38 @@ public class Fraction
     this.denom = BigInteger.valueOf(denom);
   } // Fraction(int, int)
 
+  //Build a new fraction with num and denom delineated by a "/"
   public Fraction(String frac)
   {
     String[] parts = frac.split("/");
     this.num = new BigInteger(parts[0]);
     this.denom = new BigInteger(parts[1]);
 
-  }
+  }//Fraction(string)
 
   // +---------+------------------------------------------------------
   // | Methods |
   // +---------+
 
-  // get the numerator of the fraction
+/**
+   * Gets the numerator of the fraction.
+   */
   public BigInteger numerator()
   {
     return this.num;
   } // numerator()
 
-  // get the denominator of the fraction
+/**
+   *Gets the denominator of the fraction 
+   */
   public BigInteger denominator()
   {
     return this.denom;
   }// denominator()
 
-  // multiplies this and another fraction
+/**
+   * multiplies this and another fraction.
+   */
   public Fraction multiply(Fraction mult)
     throws Exception
   {
@@ -68,10 +75,11 @@ public class Fraction
         new Fraction(this.num.multiply(mult.num),
                      this.denom.multiply(mult.denom));
     return ans.simplify();
-  } // multiply(int)
+  } // multiply(fraction)
 
-  // Add this rational number to another fraction.
-  // note: not simplified
+/**
+   * Add this fraction to another fraction.
+   */
   public Fraction add(Fraction other)
     throws Exception
   {
@@ -83,21 +91,27 @@ public class Fraction
     return ans.simplify();
   } // add(fraction)
   
-  //Subtract
+  /**
+   * Subtract another fraction from this fraction.
+   */
   public Fraction subtract(Fraction other) throws Exception
   {
     return (this.add(other.multiply(new Fraction("-1/1"))));
-  }
+  }//substract(fraction)
 
+/**
+   * Divide this fraction by another fraction.
+   */
   public Fraction divide(Fraction other)
     throws Exception
   {
     return new Fraction(other.denom.multiply(this.num),
                         this.denom.multiply(other.num)).simplify();
-  }
+  }//divide(fraction)
+
 
   /**
-   * Round the rational number up to a whole number. (Mutator)
+   * Round the rational number up to a whole number. 
    */
   public BigInteger roundUp()
   {
@@ -114,7 +128,7 @@ public class Fraction
   }// roundUp()
 
   /**
-   * Round the rational number down to a whole number. (Mutator)
+   * Round the rational number down to a whole number.
    */
   public BigInteger roundDown()
   {
@@ -126,13 +140,18 @@ public class Fraction
       return first;
   }// roundDown()
   
-
+/**
+   * Checks if a fraction is negative.
+   */
   public Boolean isNegative()
   {
     return ((this.num.compareTo(new BigInteger("0")) >= 0) ^ (this.denom.compareTo(new BigInteger(
                                                                                                   "0")) >= 0));
-  }
+  }//isNegative()
 
+/**
+   * Simplifies a fraction. 
+   */
   public Fraction simplify()
     throws Exception
   {
@@ -151,7 +170,7 @@ public class Fraction
     Fraction simple =
         new Fraction(this.num.divide(gcd), this.denom.divide(gcd));
     return simple;
-  }
+  }//simplify()
 
   /**
    * Convert this fraction to a string for ease of printing.
